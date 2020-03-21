@@ -1,6 +1,7 @@
 import time
 import mlflow
 import tensorflow as tf
+import numpy as np
 from sciml_tools.system import DeviceLogger
 
 class EnergyCallback(tf.keras.callbacks.Callback):
@@ -23,7 +24,7 @@ class EnergyCallback(tf.keras.callbacks.Callback):
 
         total_milliwatts = 0
         for key, value in power_metrics.items():
-            total_milliwatts += sum(power_metrics[key])
+            total_milliwatts += np.mean(power_metrics[key])
 
         # Conversion factors for Green house gasses for UK grid.
         # https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019
