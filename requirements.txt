@@ -2,4 +2,8 @@ pyyaml
 numpy
 scikit-learn
 Pillow
+nvidia-ml-py3
+psutil
+py-cpuinfo
 pytest
+pytest-mock
