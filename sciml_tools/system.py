@@ -45,7 +45,9 @@ class RepeatedTimer:
         self.stop()
 
     def __deepcopy__(self, memo):
-        return RepeatedTimer(interval=self.interval, *self.args, **self.kwargs)
+        newone = type(self)(self.interval, *self.args, **self.kwargs)
+        newone.__dict__.update(self.__dict__)
+        return newone
 
 
 def bytes_to(byte_count, to, bsize=1024):
@@ -266,11 +268,14 @@ class DeviceLogger(RepeatedTimer):
     def __init__(self, *args, **kwargs):
         super(DeviceLogger, self).__init__(*args, **kwargs)
         self._spec = DeviceSpecs()
-        self._metrics = defaultdict(list)
+        self.reset()
 
     def run(self):
         for key, value in self._spec.power_usage.items():
             self._metrics[key].append(value)
+
+    def reset(self):
+        self._metrics = defaultdict(list)
 
     @property
     def metrics(self):
