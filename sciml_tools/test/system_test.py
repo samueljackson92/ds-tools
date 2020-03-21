@@ -32,10 +32,18 @@ def test_DeviceLogger(mocker, device_count):
         assert 'gpu_0_power' in logger.metrics
         assert isinstance(logger.metrics['gpu_0_power'], list)
         assert len(logger.metrics['gpu_0_power']) > 0
+        assert sum(logger.metrics['gpu_0_power']) > 0
 
     logger2 = deepcopy(logger)
     assert isinstance(logger2, DeviceLogger)
     assert logger.interval == logger2.interval
+
+    if device_count > 0:
+        assert 'gpu_0_power' in logger2.metrics
+        assert isinstance(logger2.metrics['gpu_0_power'], list)
+        assert len(logger2.metrics['gpu_0_power']) > 0
+        assert sum(logger2.metrics['gpu_0_power']) > 0
+
 
 def test_host_spec():
     spec = HostSpec()

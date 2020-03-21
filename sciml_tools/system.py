@@ -268,14 +268,11 @@ class DeviceLogger(RepeatedTimer):
     def __init__(self, *args, **kwargs):
         super(DeviceLogger, self).__init__(*args, **kwargs)
         self._spec = DeviceSpecs()
-        self.reset()
+        self._metrics = defaultdict(list)
 
     def run(self):
         for key, value in self._spec.power_usage.items():
             self._metrics[key].append(value)
-
-    def reset(self):
-        self._metrics = defaultdict(list)
 
     @property
     def metrics(self):
