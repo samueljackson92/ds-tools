@@ -44,6 +44,9 @@ class RepeatedTimer:
     def __exit__(self ,type, value, traceback):
         self.stop()
 
+    def __deepcopy__(self, memo):
+        return RepeatedTimer(interval=self.interval, *self.args, **self.kwargs)
+
 
 def bytes_to(byte_count, to, bsize=1024):
     size = {'k' : 1, 'm': 2, 'g' : 3, 't' : 4, 'p' : 5, 'e' : 6 }

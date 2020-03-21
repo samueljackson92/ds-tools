@@ -4,6 +4,7 @@ import platform
 import psutil
 import pynvml as nv
 import time
+from copy import deepcopy
 from sciml_tools.system import HostSpec, DeviceSpec, DeviceSpecs, DeviceLogger
 
 @pytest.fixture(scope="module")
@@ -31,6 +32,9 @@ def test_DeviceLogger(mocker, device_count):
         assert 'gpu_0_power' in logger.metrics
         assert isinstance(logger.metrics['gpu_0_power'], list)
         assert len(logger.metrics['gpu_0_power']) > 0
+
+    logger2 = deepcopy(logger)
+    assert logger.interval == logger2.interval
 
 def test_host_spec():
     spec = HostSpec()
