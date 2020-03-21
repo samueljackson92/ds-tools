@@ -25,11 +25,13 @@ class EnergyCallback(tf.keras.callbacks.Callback):
         for key, value in power_metrics.items():
             total_milliwatts += sum(power_metrics[key])
 
+        # Conversion factors for Green house gasses for UK grid.
+        # https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019
         conversion_factors = dict(
-                co2e=0.28307,
-                co2=0.28088,
-                ch4=0.00066,
-                n2o=0.00153)
+                co2e=0.2556,
+                co2=0.25358,
+                ch4=0.00065,
+                n2o=0.00137)
 
         total_kilowatts = total_milliwatts * 1e-6
         total_hours = self._duration / 3600
