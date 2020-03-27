@@ -21,3 +21,18 @@ def normalize(img):
         a numpy array with rescaled intensity
     """
     return (img - img.min()) / (img.max() - img.min())
+
+
+def crop_center(img,percent):
+    """Central crop an image by percent
+
+    Args:
+        img: image to centrally crop by
+    Returns:
+        a numpy array centrally cropped numpy array
+    """
+    y,x = img.shape
+    cropx, cropy = int(x*percent), int(y*percent)
+    startx = (x - cropx)//2
+    starty = (y - cropy)//2
+    return img[starty:starty+cropy,startx:startx+cropx]

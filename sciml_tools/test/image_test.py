@@ -15,3 +15,8 @@ def tiff_path(tmpdir):
 def test_load_tiff(tiff_path):
     img = image.load_tiff(tiff_path)
     assert img.shape == (10, 10)
+
+def test_crop_center():
+    img = np.random.random((100, 100))
+    img = image.crop_center(img, .8)
+    assert img.shape == (80, 80)
