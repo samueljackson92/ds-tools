@@ -31,7 +31,7 @@ def crop_center(img,percent):
     Returns:
         a numpy array centrally cropped numpy array
     """
-    y,x = img.shape
+    y,x = img.shape[:2]
     cropx, cropy = int(x*percent), int(y*percent)
     startx = (x - cropx)//2
     starty = (y - cropy)//2
