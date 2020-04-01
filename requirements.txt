@@ -5,6 +5,7 @@ numpy
 scikit-learn
 Pillow
 nvidia-ml-py3
+seaborn
 psutil
 py-cpuinfo
 pytest
